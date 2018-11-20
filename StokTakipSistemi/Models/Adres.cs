@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace StokTakipSistemi.Models
 {
-    public class Firma
+    public class Adres
     {
         public int Id { get; set; }
-        public string Adi { get; set; }
-        public int AdresId { get; set; }
+        public string AdresText { get; set; }
+        public int SehirId { get; set; }
+        public int IlceId { get; set; }
     }
 }
