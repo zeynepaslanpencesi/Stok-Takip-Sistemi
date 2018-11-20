@@ -1,4 +1,6 @@
-﻿using StokTakipSistemi.Services.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using StokTakipSistemi.Data;
+using StokTakipSistemi.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,49 +11,62 @@ namespace StokTakipSistemi.Services
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        public Task Create(T item)
+        protected readonly StokTakipSistemiDbContext _dbContext;
+        protected readonly DbSet<T> _dbSet;
+
+        public GenericRepository(StokTakipSistemiDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
+            _dbSet = _dbContext.Set<T>();
+        }
+        public async Task Create(T item)
+        {
+            await _dbSet.AddAsync(item);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task Delete(T item)
+        public async Task Delete(T item)
         {
-            throw new NotImplementedException();
+            _dbSet.Remove(item);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task Delete(int? id)
+        public async Task Delete(int? id)
         {
-            throw new NotImplementedException();
+            var entity = await Get(id);
+            
         }
 
-        public Task<T> Get(int? id)
+        public async Task<T> Get(int? id)
         {
-            throw new NotImplementedException();
+            return await _dbSet.FindAsync(id);
         }
 
-        public Task<T> Get(Expression<Func<T, bool>> predicate)
+        public async Task<T> Get(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await _dbSet.Where(predicate).FirstOrDefaultAsync();
         }
 
         public IEnumerable<T> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbSet.AsEnumerable();
         }
 
         public IEnumerable<T> GetAll(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return _dbSet.Where(predicate).AsEnumerable();
         }
 
         public Task<bool> IsExist(Expression<Func<T, bool>> expression)
         {
-            throw new NotImplementedException();
+            return _dbSet.AsNoTracking().AnyAsync(expression);
         }
 
-        public Task Update(T item)
+        public async Task Update(T item)
         {
-            throw new NotImplementedException();
+            _dbSet.Attach(item);
+            _dbContext.Entry(item).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

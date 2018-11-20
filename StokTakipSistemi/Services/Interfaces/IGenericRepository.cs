@@ -10,12 +10,12 @@ namespace StokTakipSistemi.Services.Interfaces
     {
         IEnumerable<T> GetAll();
         IEnumerable<T> GetAll(Expression<Func<T, bool>> predicate);
-        Task<T> Get(int? id);
+        Task<T> GetAsync(int? id);
         Task<T> Get(Expression<Func<T, bool>> predicate);
-        Task Create(T item);
+        Task CreateAsync(T item);
         Task Update(T item);
-        Task Delete(T item);
-        Task Delete(int? id);
+        Task DeleteAsync(T item);
+        Task DeleteAsync(int? id);
         Task<bool> IsExist(Expression<Func<T, bool>> expression);
     }
 }
