@@ -87,5 +87,24 @@ namespace StokTakipSistemi.Controllers
 
             return NotFound();
         }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var itemToDelete = await _service.Get(id);
+
+            if (itemToDelete != null)
+            {
+                await _service.Delete(id);
+                return RedirectToAction("Index");
+            }
+
+            return NotFound();
+        }
+
     }
 }
