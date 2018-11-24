@@ -52,5 +52,40 @@ namespace StokTakipSistemi.Controllers
             return View();
 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var itemToUpdate = await _service.Get(id);
+
+            if (itemToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            return View(itemToUpdate);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, Sehir sehir)
+        {
+            if (id != sehir.Id)
+            {
+
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _service.Update(sehir);
+                return RedirectToAction("Index");
+            }
+
+            return NotFound();
+        }
     }
 }
