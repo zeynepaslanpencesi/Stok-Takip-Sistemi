@@ -9,5 +9,6 @@ namespace StokTakipSistemi.Services.Interfaces
 
     public interface ISehirService : IGenericRepository<Sehir>
     {
+       
     }
 }
