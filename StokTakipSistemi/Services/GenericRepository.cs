@@ -25,7 +25,6 @@ namespace StokTakipSistemi.Services
             await _dbContext.SaveChangesAsync();
         }
 
-        
         public async Task Delete(T item)
         {
             _dbSet.Remove(item);
@@ -37,10 +36,6 @@ namespace StokTakipSistemi.Services
             var entity = await Get(id);
             
         }
-
-        
-
-        
 
         public async Task<T> Get(int? id)
         {
@@ -62,8 +57,6 @@ namespace StokTakipSistemi.Services
             return _dbSet.Where(predicate).AsEnumerable();
         }
 
-        
-
         public Task<bool> IsExist(Expression<Func<T, bool>> expression)
         {
             return _dbSet.AsNoTracking().AnyAsync(expression);
@@ -75,5 +68,6 @@ namespace StokTakipSistemi.Services
             _dbContext.Entry(item).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
         }
+
     }
 }
