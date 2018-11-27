@@ -49,5 +49,42 @@ namespace StokTakipSistemi.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var itemToUpdate = await _departmanService.Get(id);
+
+            if (itemToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            return View(itemToUpdate);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int? id, Departman departman)
+        {
+            if (id != departman.Id)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Errors = ModelState.Values.SelectMany(e => e.Errors);
+
+            if (ModelState.IsValid)
+            {
+                await _departmanService.Update(departman);
+                return RedirectToAction("Index");
+            }
+
+
+            return View();
+        }
     }
 }
