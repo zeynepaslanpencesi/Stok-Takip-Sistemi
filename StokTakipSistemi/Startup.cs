@@ -35,6 +35,7 @@ namespace StokTakipSistemi
             services.AddScoped<IIlceService, IlceService>();
             services.AddScoped<IAdresService, AdresService>();
             services.AddScoped<IDepartmanService, DepartmanService>();
+            services.AddScoped<IFirmaService, FirmaService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
