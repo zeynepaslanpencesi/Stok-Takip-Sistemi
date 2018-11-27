@@ -25,11 +25,7 @@ namespace StokTakipSistemi.Services
             await _dbContext.SaveChangesAsync();
         }
 
-        public Task CreateAsync(T item)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public async Task Delete(T item)
         {
             _dbSet.Remove(item);
@@ -42,15 +38,9 @@ namespace StokTakipSistemi.Services
             
         }
 
-        public Task DeleteAsync(T item)
-        {
-            throw new NotImplementedException();
-        }
+        
 
-        public Task DeleteAsync(int? id)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public async Task<T> Get(int? id)
         {
@@ -72,10 +62,7 @@ namespace StokTakipSistemi.Services
             return _dbSet.Where(predicate).AsEnumerable();
         }
 
-        public Task<T> GetAsync(int? id)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public Task<bool> IsExist(Expression<Func<T, bool>> expression)
         {
