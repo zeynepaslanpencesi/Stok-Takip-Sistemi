@@ -53,6 +53,7 @@ namespace StokTakipSistemi
                 config.CreateMap<SehirVM, Sehir>();
                 config.CreateMap<IlceVM, Ilce>();
                 config.CreateMap<AdresVM, Adres>();
+                config.CreateMap<DepartmanVM, Departman>();
             });
 
                 app.UseMvc(routes =>
