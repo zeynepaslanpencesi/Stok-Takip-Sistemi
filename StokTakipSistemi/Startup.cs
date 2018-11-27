@@ -32,6 +32,7 @@ namespace StokTakipSistemi
             services.AddMvc();
 
             services.AddScoped<ISehirService, SehirService>();
+            services.AddScoped<IIlceService, IlceService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
