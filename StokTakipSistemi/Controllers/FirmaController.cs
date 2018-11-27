@@ -48,6 +48,41 @@ namespace StokTakipSistemi.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var itemToUpdate = await _firmaService.Get(id);
+
+            if (itemToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            return View(itemToUpdate);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, Firma firma)
+        {
+            if (id != firma.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _firmaService.Update(firma);
+                return RedirectToAction("Index");
+            }
+
+            return NotFound();
+        }
+
 
     }
 }
