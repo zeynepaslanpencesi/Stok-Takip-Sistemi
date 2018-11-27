@@ -1,4 +1,4 @@
-﻿@model StokTakipSistemi.Models.Ilce
+﻿@model StokTakipSistemi.Models.Adres
 
 @{
     ViewData["Title"] = "Düzenle";
@@ -9,7 +9,7 @@
         <div class="header">
             <h2>
                 @ViewData["Title"]
-                <small>İlçe Düzenle</small>
+                <small>Adresi Düzenle</small>
             </h2>
             <ul class="header-dropdown m-r--5">
                 <li class="dropdown">
@@ -35,8 +35,8 @@
                         </div>
                         <div class="form-group">
                             <div class="form-line">
-                                <input asp-for="Adi" class="form-control" placeholder="Adı" />
-                                <span asp-validation-for="Adi" class="text-danger"></span>
+                                <input asp-for="AdresText" class="form-control" placeholder="Adres" />
+                                <span asp-validation-for="AdresText" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group">
