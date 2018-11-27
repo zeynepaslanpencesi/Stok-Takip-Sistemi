@@ -66,5 +66,23 @@ namespace StokTakipSistemi.Controllers
 
             return View(itemToUpdate);
         }
+
+        
+        [HttpPost]
+        public IActionResult Edit(int id, Adres adres)
+        {
+            if (id != adres.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _adresService.Update(adres);
+                return RedirectToAction("Index");
+            }
+
+            return NotFound();
+        }
     }
 }
