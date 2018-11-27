@@ -83,6 +83,23 @@ namespace StokTakipSistemi.Controllers
             return NotFound();
         }
 
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var itemToDelete = _firmaService.Get(id);
+
+            if (itemToDelete != null)
+            {
+                _firmaService.Delete(id);
+                return RedirectToAction("Index");
+            }
+
+            return NotFound();
+        }
 
     }
 }
