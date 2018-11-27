@@ -49,6 +49,40 @@ namespace StokTakipSistemi.Controllers
             return View();
 
         }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var itemToUpdate = await _ilceService.Get(id);
+
+            if (itemToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            return View(itemToUpdate);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, Ilce ilce)
+        {
+            if (id != ilce.Id)
+            {
+
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _ilceService.Update(ilce);
+                return RedirectToAction("Index");
+            }
+
+            return NotFound();
+        }
 
     }
 }
