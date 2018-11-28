@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StokTakipSistemi.Data;
+using StokTakipSistemi.DTOModels;
 using StokTakipSistemi.Models;
 using StokTakipSistemi.Services;
 using StokTakipSistemi.Services.Interfaces;
@@ -58,6 +59,7 @@ namespace StokTakipSistemi
                 config.CreateMap<DepartmanVM, Departman>();
                 config.CreateMap<FirmaVM, Firma>();
                 config.CreateMap<UrunVM, Urun>();
+                config.CreateMap<Urun, UrunDTO>();
             });
 
                 app.UseMvc(routes =>

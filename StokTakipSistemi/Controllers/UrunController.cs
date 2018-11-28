@@ -17,11 +17,10 @@ namespace StokTakipSistemi.Controllers
             _urunService = urunService;
            
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var items = _urunService.GetAll();
+            var items = await _urunService.GetAllWithRelatives();
             return View(items);
-
         }
     }
 }
