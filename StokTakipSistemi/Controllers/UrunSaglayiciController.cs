@@ -48,5 +48,40 @@ namespace StokTakipSistemi.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var itemToUpdate = await _urunSaglayiciService.Get(id);
+
+            if (itemToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            return View(itemToUpdate);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int? id, UrunSaglayici urunSaglayici)
+        {
+            if (id != urunSaglayici.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _urunSaglayiciService.Update(urunSaglayici);
+                return RedirectToAction("Index");
+            }
+
+            return NotFound();
+        }
     }
 }
