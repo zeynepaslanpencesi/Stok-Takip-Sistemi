@@ -10,8 +10,8 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        Product List
-                        <small>List of all products</small>
+                        Ürün Listesi
+                        <small>Tüm Ürünlerin Listesi</small>
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
@@ -19,7 +19,7 @@
                                 <i class="material-icons">more_vert</i>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a asp-action="Create" class=" waves-effect waves-block">New Product</a></li>
+                                <li><a asp-action="Create" class=" waves-effect waves-block">Yeni Ürün</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -44,8 +44,8 @@
                                     <td>@item.Marka</td>
                                     <td>@item.UrunTur</td>
                                     <td>
-                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                        <a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id">Sil</a>
                                     </td>
                                 </tr>
                             }

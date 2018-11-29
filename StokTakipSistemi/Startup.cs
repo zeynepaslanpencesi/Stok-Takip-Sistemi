@@ -38,10 +38,11 @@ namespace StokTakipSistemi
             services.AddScoped<IDepartmanService, DepartmanService>();
             services.AddScoped<IFirmaService, FirmaService>();
             services.AddScoped<IUrunService, UrunService>();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, StokTakipSistemiDbContext dbContext)
         {
             if (env.IsDevelopment())
             {
@@ -60,13 +61,15 @@ namespace StokTakipSistemi
                 config.CreateMap<FirmaVM, Firma>();
                 config.CreateMap<UrunVM, Urun>();
                 config.CreateMap<Urun, UrunDTO>();
+
+
             });
 
                 app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Adres}/{action=Index}/{id?}");
+                    template: "{controller=Urun}/{action=Index}/{id?}");
             });
         }
     }

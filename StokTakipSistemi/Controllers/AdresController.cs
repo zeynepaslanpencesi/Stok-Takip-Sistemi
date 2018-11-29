@@ -36,9 +36,9 @@ namespace StokTakipSistemi.Controllers
         {
             if (ModelState.IsValid)
             {
-                var isSameAddressExists = await _adresService.IsExist(c => c.AdresText == adres.AdresText);
+                var isSameAdresExists = await _adresService.IsExist(c => c.AdresText == adres.AdresText);
 
-                if (!isSameAddressExists)
+                if (!isSameAdresExists)
                 {
                     var mappedAdres = Mapper.Map<Adres>(adres);
                     await _adresService.Create(mappedAdres);

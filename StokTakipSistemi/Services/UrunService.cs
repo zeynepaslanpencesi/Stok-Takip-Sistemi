@@ -43,7 +43,7 @@ namespace StokTakipSistemi.Services
         public async Task<List<UrunDTO>> GetAllWithRelatives()
         {
             var uruns = await _dbSet.ToListAsync();
-            var urunDTOs = new List<UrunDTO>();
+            var urunDTOS = new List<UrunDTO>();
 
             foreach (var item in uruns)
             {
@@ -59,10 +59,10 @@ namespace StokTakipSistemi.Services
                     Marka = marka.Adi
                 };
 
-                urunDTOs.Add(mappedUrun);
+                urunDTOS.Add(mappedUrun);
             }
 
-            return urunDTOs;
+            return urunDTOS;
         }
     }
 }
