@@ -39,6 +39,7 @@ namespace StokTakipSistemi
             services.AddScoped<IFirmaService, FirmaService>();
             services.AddScoped<IUrunService, UrunService>();
             services.AddScoped<IMarkaService, MarkaService>();
+            services.AddScoped<IUrunSaglayiciService, UrunSaglayiciService>();
            
         }
 
