@@ -48,5 +48,40 @@ namespace StokTakipSistemi.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var itemToUpdate = await _markaService.Get(id);
+
+            if (itemToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            return View(itemToUpdate);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, Marka marka)
+        {
+            if (id != marka.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _markaService.Update(marka);
+                return RedirectToAction("Index");
+            }
+
+            return NotFound();
+        }
     }
 }
