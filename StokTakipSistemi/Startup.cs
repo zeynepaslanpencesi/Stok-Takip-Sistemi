@@ -65,6 +65,7 @@ namespace StokTakipSistemi
                 config.CreateMap<UrunVM, Urun>();
                 config.CreateMap<MarkaVM, Marka>();
                 config.CreateMap<UrunSaglayiciVM, UrunSaglayici>();
+                config.CreateMap<UrunTurVM, UrunTur>();
                 config.CreateMap<Urun, UrunDTO>();
 
 
