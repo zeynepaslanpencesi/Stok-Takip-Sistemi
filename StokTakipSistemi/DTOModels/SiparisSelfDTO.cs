@@ -12,6 +12,6 @@ namespace StokTakipSistemi.DTOModels
         public int FaturaId { get; set; }
         public string Urun { get; set; }
         public int UrunId { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime Tarih { get; set; }
     }
 }
