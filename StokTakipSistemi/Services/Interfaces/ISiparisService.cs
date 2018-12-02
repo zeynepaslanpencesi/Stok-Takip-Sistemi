@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StokTakipSistemi.Services.Interfaces
 {
-    public interface ISiparicService: IGenericRepository<Siparis>
+    public interface ISiparisService: IGenericRepository<Siparis>
     {
     }
 }

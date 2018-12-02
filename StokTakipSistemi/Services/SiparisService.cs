@@ -1,5 +1,6 @@
 ﻿using StokTakipSistemi.Data;
 using StokTakipSistemi.Models;
+using StokTakipSistemi.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -42,6 +42,7 @@ namespace StokTakipSistemi
             services.AddScoped<IUrunSaglayiciService, UrunSaglayiciService>();
             services.AddScoped<IUrunTurService, UrunTurService>();
             services.AddScoped<ISiparisService, SiparisService>();
+            services.AddScoped<IFaturaService, FaturaService>();
            
         }
 
