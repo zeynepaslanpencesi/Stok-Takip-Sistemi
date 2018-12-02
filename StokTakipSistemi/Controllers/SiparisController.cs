@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using StokTakipSistemi.DTOModels;
 using StokTakipSistemi.Services;
 using StokTakipSistemi.Services.Interfaces;
 
