@@ -1,0 +1,55 @@
+﻿@model IEnumerable<StokTakipSistemi.DTOModels.SiparisSelfDTO>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        Siparis Listesi
+                        <small>Tüm siparişlerin listesi</small>
+                    </h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Urun</th>
+                                <th>Adet</th>
+                                <th>Tarih</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Urun</td>
+                                    <td>@item.Adet</td>
+                                    <td>@item.Tarih.ToShortDateString()</td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.FaturaId">Fatura</a> |
+                                        <a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

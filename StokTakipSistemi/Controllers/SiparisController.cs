@@ -33,7 +33,7 @@ namespace StokTakipSistemi.Controllers
                 var urun = await _urunService.Get(item.UrunId);
                 item.Urun = urun.Adi;
                 var fatura = await _faturaService.Get(item.FaturaId);
-                item.Date = fatura.Tarih;
+                item.Tarih = fatura.Tarih;
             }
 
             return View(items);
