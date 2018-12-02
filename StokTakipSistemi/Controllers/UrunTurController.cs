@@ -86,5 +86,23 @@ namespace StokTakipSistemi.Controllers
             ViewBag.Errors = ModelState.Values.SelectMany(e => e.Errors);
             return View(urunTur);
         }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var itemToDelete = _urunTurService.Get(id);
+
+            if (itemToDelete != null)
+            {
+                await _urunTurService.Delete(id);
+                return RedirectToAction("Index");
+            }
+
+            return NotFound();
+        }
     }
 }
