@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StokTakipSistemi.Services.Interfaces
 {
-    public class IFaturaService: IGenericRepository<Fatura>
+    public interface IFaturaService: IGenericRepository<Fatura>
     {
     }
 }
