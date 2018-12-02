@@ -50,5 +50,41 @@ namespace StokTakipSistemi.Controllers
             ViewBag.Errors = ModelState.Values.SelectMany(d => d.Errors);
             return View(urunTur);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var itemToUpdate = await _urunTurService.Get(p => p.Id == id);
+
+            if (itemToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            return View(itemToUpdate);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int? id, UrunTur urunTur)
+        {
+            if (id != urunTur.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                await _urunTurService.Update(urunTur);
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Errors = ModelState.Values.SelectMany(e => e.Errors);
+            return View(urunTur);
+        }
     }
 }
