@@ -36,7 +36,9 @@ namespace StokTakipSistemi.Controllers
                 item.Tarih = fatura.Tarih;
             }
 
-            return View(items);
+            // burada dönderdiğin tip yanlış
+
+            return View(mappedItems);
         }
     }
 }
