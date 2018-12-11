@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using StokTakipSistemi.Helpers;
+using StokTakipSistemi.Models;
 using StokTakipSistemi.Services.Interfaces;
+using StokTakipSistemi.ViewModels;
 
 namespace StokTakipSistemi.Controllers
 {
@@ -36,33 +39,33 @@ namespace StokTakipSistemi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] BillVM bill)
+        public async Task<IActionResult> Create([FromBody] FaturaVM fatura)
         {
             if (ModelState.IsValid)
             {
-                var mappedBill = Mapper.Map<Bill>(bill);
+                var mappedFatura = Mapper.Map<Fatura>(fatura);
 
-                if (bill.Orders == null)
+                if (fatura.Siparisler == null)
                 {
                     return NotFound();
                 }
 
-                await _billService.Create(mappedBill);
+                await _faturaService.Create(mappedFatura);
 
-                var mappedOrders = Mapper.Map<ICollection<Order>>(bill.Orders);
-                var billId = mappedBill.Id;
+                var mappedOrders = Mapper.Map<ICollection<Siparis>>(fatura.Siparisler);
+                var faturaId = mappedFatura.Id;
 
                 foreach (var item in mappedOrders)
                 {
-                    item.BillId = billId;
-                    await _orderService.Create(item);
+                    item.FaturaId = faturaId;
+                    await _siparisService.Create(item);
                 }
 
                 return RedirectToAction("Index");
             }
 
             ViewBag.Errors = ModelState.Values.SelectMany(d => d.Errors);
-            return View(bill);
+            return View(fatura);
         }
     }
 }
