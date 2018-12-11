@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace StokTakipSistemi.DTOModels
+namespace StokTakipSistemi.ViewModels
 {
-    public class FaturaDüzenleDTO
+    public class FaturaVM
     {
-        public int Id { get; set; }
         public DateTime Tarih { get; set; }
         public int UrunSaglayiciId { get; set; }
-        public ICollection<SiparisDTO> Siparisler { get; set; }
+        public ICollection<SiparisVM> Siparisler { get; set; }
     }
 }
