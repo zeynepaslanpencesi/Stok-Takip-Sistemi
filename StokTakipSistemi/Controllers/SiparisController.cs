@@ -36,9 +36,44 @@ namespace StokTakipSistemi.Controllers
                 item.Tarih = fatura.Tarih;
             }
 
-            // burada dönderdiğin tip yanlış
-
             return View(mappedItems);
         }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var itemToDelete = await _siparisService.Get(id);
+
+            if (itemToDelete != null)
+            {
+                await _siparisService.Delete(itemToDelete);
+                return RedirectToAction("Index");
+            }
+
+            return NotFound();
+        }
+
+       /* public async Task<IActionResult> DeleteFromBill(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var itemToDelete = await _siparisService.Get(id);
+
+            if (itemToDelete != null)
+            {
+                await _siparisService.Delete(itemToDelete);
+                int markaId = itemToDelete.MarkaId;
+                return RedirectToAction("Düzenle", "Fatura", new { id = markaId });
+            }
+
+            return Json(false);
+        }*/
     }
 }
