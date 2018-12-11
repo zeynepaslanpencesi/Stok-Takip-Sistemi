@@ -26,5 +26,43 @@ namespace StokTakipSistemi.Controllers
             var items = await _faturaService.GetAllWithRelatives();
             return View(items);
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ViewBag.Providers = _helper.GetUrunSaglayiciSelectList();
+            ViewBag.Products = _helper.GetUrunSelectList();
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] BillVM bill)
+        {
+            if (ModelState.IsValid)
+            {
+                var mappedBill = Mapper.Map<Bill>(bill);
+
+                if (bill.Orders == null)
+                {
+                    return NotFound();
+                }
+
+                await _billService.Create(mappedBill);
+
+                var mappedOrders = Mapper.Map<ICollection<Order>>(bill.Orders);
+                var billId = mappedBill.Id;
+
+                foreach (var item in mappedOrders)
+                {
+                    item.BillId = billId;
+                    await _orderService.Create(item);
+                }
+
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Errors = ModelState.Values.SelectMany(d => d.Errors);
+            return View(bill);
+        }
     }
 }

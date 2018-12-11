@@ -130,6 +130,45 @@ namespace StokTakipSistemi.Helpers
             return selectList;
         }
 
+      
+        public IList<SelectListItem> GetUrunSaglayiciSelectList(int? id = null)
+        {
+            IList<SelectListItem> selectList;
+
+            if (id == null)
+            {
+                selectList = _dbContext.UrunSaglayici.ToList().
+                    Select(p => new SelectListItem() { Text = p.Adi, Value = p.Id.ToString() }).
+                    ToList();
+
+                return selectList;
+            }
+
+            selectList = new List<SelectListItem>();
+
+            foreach (var urunsaglayici in _dbContext.UrunSaglayici.ToList())
+            {
+                if (urunsaglayici.Id == id)
+                {
+                    selectList.Add(new SelectListItem
+                    {
+                        Value = urunsaglayici.Id.ToString(),
+                        Text = urunsaglayici.Adi,
+                        Selected = true
+                    });
+                }
+                else
+                {
+                    selectList.Add(new SelectListItem
+                    {
+                        Value = urunsaglayici.Id.ToString(),
+                        Text = urunsaglayici.Adi
+                    });
+                }
+            }
+
+            return selectList;
         }
+    }
     }
 
