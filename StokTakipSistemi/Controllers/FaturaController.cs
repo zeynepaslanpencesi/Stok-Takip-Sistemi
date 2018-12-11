@@ -67,5 +67,43 @@ namespace StokTakipSistemi.Controllers
             ViewBag.Errors = ModelState.Values.SelectMany(d => d.Errors);
             return View(fatura);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var itemToUpdate = await _faturaService.GetWithSiparisler(id);
+
+            if (itemToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Providers = _helper.GetUrunSaglayiciSelectList(itemToUpdate.Id);
+            ViewBag.Products = _helper.GetUrunSelectList();
+            return View(itemToUpdate);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int? id, Fatura fatura)
+        {
+            if (id != fatura.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                await _faturaService.Update(fatura);
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Errors = ModelState.Values.SelectMany(m => m.Errors);
+            return View(fatura);
+        }
     }
 }
