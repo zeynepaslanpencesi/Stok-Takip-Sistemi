@@ -105,5 +105,23 @@ namespace StokTakipSistemi.Controllers
             ViewBag.Errors = ModelState.Values.SelectMany(m => m.Errors);
             return View(fatura);
         }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var itemToDelete = await _faturaService.Get(id);
+
+            if (itemToDelete != null)
+            {
+                await _faturaService.Delete(itemToDelete);
+                return RedirectToAction("Index");
+            }
+
+            return NotFound();
+        }
     }
 }
