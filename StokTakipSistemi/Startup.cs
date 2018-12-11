@@ -44,6 +44,7 @@ namespace StokTakipSistemi
             services.AddScoped<IUrunTurService, UrunTurService>();
             services.AddScoped<ISiparisService, SiparisService>();
             services.AddScoped<IFaturaService, FaturaService>();
+            services.AddScoped<IUnvanService, UnvanService>();
             services.AddScoped((ctx) =>
             {
                 StokTakipSistemiDbContext svc = ctx.GetService<StokTakipSistemiDbContext>();
