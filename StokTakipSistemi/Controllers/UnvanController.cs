@@ -47,5 +47,41 @@ namespace StokTakipSistemi.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var itemToUpdate = await _unvanService.Get(id);
+
+            if (itemToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            return View(itemToUpdate);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, Unvan unvan)
+        {
+            if (id != unvan.Id)
+            {
+
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _unvanService.Update(unvan);
+                return RedirectToAction("Index");
+            }
+
+            return NotFound();
+        }
     }
 }
