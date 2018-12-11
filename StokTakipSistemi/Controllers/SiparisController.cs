@@ -57,7 +57,7 @@ namespace StokTakipSistemi.Controllers
             return NotFound();
         }
 
-       /* public async Task<IActionResult> DeleteFromBill(int? id)
+       public async Task<IActionResult> DeleteFromFatura(int? id)
         {
             if (id == null)
             {
@@ -69,11 +69,11 @@ namespace StokTakipSistemi.Controllers
             if (itemToDelete != null)
             {
                 await _siparisService.Delete(itemToDelete);
-                int markaId = itemToDelete.MarkaId;
-                return RedirectToAction("Düzenle", "Fatura", new { id = markaId });
+                // markaId = itemToDelete.MarkaId;
+                //return RedirectToAction("Düzenle", "Fatura", new { id = markaId });
             }
 
             return Json(false);
-        }*/
+        }
     }
 }
