@@ -52,10 +52,10 @@ namespace StokTakipSistemi.Controllers
 
                 await _faturaService.Create(mappedFatura);
 
-                var mappedOrders = Mapper.Map<ICollection<Siparis>>(fatura.Siparisler);
+                var mappedSiparisler = Mapper.Map<ICollection<Siparis>>(fatura.Siparisler);
                 var faturaId = mappedFatura.Id;
 
-                foreach (var item in mappedOrders)
+                foreach (var item in mappedSiparisler)
                 {
                     item.FaturaId = faturaId;
                     await _siparisService.Create(item);
