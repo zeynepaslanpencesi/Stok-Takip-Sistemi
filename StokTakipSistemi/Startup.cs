@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StokTakipSistemi.Data;
 using StokTakipSistemi.DTOModels;
+using StokTakipSistemi.Helpers;
 using StokTakipSistemi.Models;
 using StokTakipSistemi.Services;
 using StokTakipSistemi.Services.Interfaces;
@@ -43,7 +44,12 @@ namespace StokTakipSistemi
             services.AddScoped<IUrunTurService, UrunTurService>();
             services.AddScoped<ISiparisService, SiparisService>();
             services.AddScoped<IFaturaService, FaturaService>();
-           
+            services.AddScoped((ctx) =>
+            {
+                StokTakipSistemiDbContext svc = ctx.GetService<StokTakipSistemiDbContext>();
+                return new Helper(svc);
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -19,7 +19,7 @@ namespace StokTakipSistemi.Controllers
         private readonly StokTakipSistemiDbContext _dbContext;
         private readonly Helper _helper;
 
-        public UrunController(IUrunService urunService, StokTakipSistemiDbContext dbContext)
+        public UrunController(IUrunService urunService, StokTakipSistemiDbContext dbContext, Helper helper)
         {
             _urunService = urunService;
             _dbContext = dbContext;
@@ -157,8 +157,8 @@ namespace StokTakipSistemi.Controllers
                 return NotFound();
             }
 
-            ViewBag.ProductTypes = _helper.GetUrunTurSelectList(itemToUpdate.UrunTurId);
-            ViewBag.Brands = _helper.GetMarkaSelectList(itemToUpdate.MarkaId);
+            ViewBag.UrunTurs = _helper.GetUrunTurSelectList(itemToUpdate.UrunTurId);
+            ViewBag.Markas = _helper.GetMarkaSelectList(itemToUpdate.MarkaId);
 
             return View(itemToUpdate);
         }
