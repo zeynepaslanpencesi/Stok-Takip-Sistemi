@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StokTakipSistemi.Data;
+using StokTakipSistemi.Helpers;
 using StokTakipSistemi.Models;
 using StokTakipSistemi.Services.Interfaces;
 using StokTakipSistemi.ViewModels;
@@ -16,11 +17,13 @@ namespace StokTakipSistemi.Controllers
     {
         private readonly IUrunService _urunService;
         private readonly StokTakipSistemiDbContext _dbContext;
+        private readonly Helper _helper;
 
         public UrunController(IUrunService urunService, StokTakipSistemiDbContext dbContext)
         {
             _urunService = urunService;
             _dbContext = dbContext;
+            _helper = helper;
 
         }
 
@@ -136,6 +139,45 @@ namespace StokTakipSistemi.Controllers
             }
 
             ViewBag.Errors = ModelState.Values.SelectMany(d => d.Errors);
+            return View(urun);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var itemToUpdate = await _urunService.Get(id);
+
+            if (itemToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.ProductTypes = _helper.GetUrunTurSelectList(itemToUpdate.UrunTurId);
+            ViewBag.Brands = _helper.GetMarkaSelectList(itemToUpdate.MarkaId);
+
+            return View(itemToUpdate);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int? id, Urun urun)
+        {
+            if (id != urun.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                await _urunService.Update(urun);
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Errors = ModelState.Values.SelectMany(e => e.Errors);
             return View(urun);
         }
 
