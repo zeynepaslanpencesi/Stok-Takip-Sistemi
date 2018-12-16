@@ -36,9 +36,9 @@ namespace StokTakipSistemi.Controllers
         {
             if (ModelState.IsValid)
             {
-                var isSameSehirExists = await _ilceService.IsExist(c => c.Adi == ilce.Adi);
+                var isSameIlceExists = await _ilceService.IsExist(c => c.Adi == ilce.Adi);
 
-                if (!isSameSehirExists)
+                if (!isSameIlceExists)
                 {
                     var mappedIlce = Mapper.Map<Ilce>(ilce);
                     await _ilceService.Create(mappedIlce);
