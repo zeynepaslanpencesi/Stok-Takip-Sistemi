@@ -198,6 +198,80 @@ namespace StokTakipSistemi.Helpers
             return ılceler;
         }
 
+
+
+        public IList<SelectListItem> GetDepartmanSelectList(int? id = null)
+        {
+            if (id == null)
+            {
+                IList<SelectListItem> selectList = _dbContext.Departman.ToList().
+                    Select(t => new SelectListItem() { Text = t.Adi, Value = t.Id.ToString() }).
+                    ToList();
+
+                return selectList;
+            }
+
+            IList<SelectListItem> list = new List<SelectListItem>();
+
+            foreach (var departman in _dbContext.Departman.ToList())
+            {
+                if (departman.Id == id)
+                {
+                    list.Add(new SelectListItem
+                    {
+                        Value = departman.Id.ToString(),
+                        Text = departman.Adi,
+                        Selected = true
+                    });
+                }
+                else
+                {
+                    list.Add(new SelectListItem
+                    {
+                        Value = departman.Id.ToString(),
+                        Text = departman.Adi
+                    });
+                }
+            }
+            return list;
+        }
+
+        public IList<SelectListItem> GetUnvanSelectList(int? id = null)
+        {
+            if (id == null)
+            {
+                IList<SelectListItem> selectList = _dbContext.Unvan.ToList().
+                    Select(t => new SelectListItem() { Text = t.Adi, Value = t.Id.ToString() }).
+                    ToList();
+
+                return selectList;
+            }
+
+            IList<SelectListItem> list = new List<SelectListItem>();
+
+            foreach (var unvan in _dbContext.Unvan.ToList())
+            {
+                if (unvan.Id == id)
+                {
+                    list.Add(new SelectListItem
+                    {
+                        Value = unvan.Id.ToString(),
+                        Text = unvan.Adi,
+                        Selected = true
+                    });
+                }
+                else
+                {
+                    list.Add(new SelectListItem
+                    {
+                        Value = unvan.Id.ToString(),
+                        Text = unvan.Adi
+                    });
+                }
+            }
+            return list;
+        }
+
     }
 }
 
