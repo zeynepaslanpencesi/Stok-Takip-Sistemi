@@ -1,0 +1,98 @@
+﻿@model StokTakipSistemi.Models.Kullanici
+
+
+
+@{
+    ViewData["Title"] = "Oluştur";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+        <div class="header">
+            <h2>
+                @ViewData["Title"]
+                <small>Yeni Kullanıcı Oluştur</small>
+            </h2>
+            <ul class="header-dropdown m-r--5">
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                        <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a asp-action="Index" class=" waves-effect waves-block">Listeye geri dön</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="body">
+            <h2 class="card-inside-title">Form</h2>
+            <div class="row clearfix">
+                <form asp-action="Create" method="post">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input asp-for="Adi" class="form-control" placeholder="Adı" />
+                                <span asp-validation-for="Adi" class="text-danger"></span>
+                            </div>
+                        </div>                        
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input asp-for="Soyadi" class="form-control" placeholder="Soyadı" />
+                                <span asp-validation-for="Soyadi" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input asp-for="Email" class="form-control" placeholder="Email" type="email" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input asp-for="Sifre" class="form-control" placeholder="Şifre" type="password" maxlength="15" />
+                                <span asp-validation-for="Sifre" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input asp-for="Dogum_gunu" class="form-control" placeholder="Doğum Günü" />
+                                <span asp-validation-for="Dogum_gunu" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <select asp-for="DepartmanId" asp-items="ViewBag.Departmanlar" class="form-control" placeholder="Departman">
+                                    <option value="">Departman Seç</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <select asp-for="UnvanId" asp-items="ViewBag.Unvanlar" class="form-control">
+                                    <option value="">Ünvan Seç</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input asp-for="Baslangic_Tarihi" class="form-control" placeholder="Başlangıç Tarihi" />
+                                <span asp-validation-for="Baslangic_Tarihi" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-line checkbox">
+                                <input type="submit" class="btn btn-block btn-lg btn-default waves-effect" id="create" value="Oluştur">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>//$(document).ready(function () {
+    //    $('#send').on('click', function () {
+    //        e.preventDefault();
+
+    //    });
+    //});</script>
