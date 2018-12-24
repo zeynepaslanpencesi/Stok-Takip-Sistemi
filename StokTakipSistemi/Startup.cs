@@ -79,6 +79,7 @@ namespace StokTakipSistemi
                 config.CreateMap<SiparisVM, Siparis>();
                 config.CreateMap<FaturaVM, Fatura>();
                 config.CreateMap<UnvanVM, Unvan>();
+                config.CreateMap<KullaniciVM, Kullanici>();
                 config.CreateMap<Urun, UrunDTO>();
                 config.CreateMap<Siparis, SiparisDTO>();
                 config.CreateMap<Siparis, SiparisSelfDTO>();
