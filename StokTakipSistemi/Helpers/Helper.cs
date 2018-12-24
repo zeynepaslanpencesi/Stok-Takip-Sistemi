@@ -169,6 +169,35 @@ namespace StokTakipSistemi.Helpers
 
             return selectList;
         }
+
+
+        public IList<SelectListItem> GetIlcelerOfSelectedSehir(int? id)
+        {
+            List<SelectListItem> ılceler = new List<SelectListItem>();
+
+            foreach (var ilce in _dbContext.Ilce.ToList())
+            {
+                if (ilce.Id == id)
+                {
+                    ılceler.Add(new SelectListItem
+                    {
+                        Value = ilce.Id.ToString(),
+                        Text = ilce.Adi,
+                        Selected = true
+                    });
+                }
+                else
+                {
+                    ılceler.Add(new SelectListItem
+                    {
+                        Value = ilce.Id.ToString(),
+                        Text = ilce.Adi
+                    });
+                }
+            }
+            return ılceler;
+        }
+
     }
-    }
+}
 
