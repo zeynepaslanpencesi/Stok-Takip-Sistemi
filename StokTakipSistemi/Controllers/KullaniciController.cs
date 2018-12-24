@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using StokTakipSistemi.Helpers;
+using StokTakipSistemi.Models;
 using StokTakipSistemi.Services.Interfaces;
+using StokTakipSistemi.ViewModels;
 
 namespace StokTakipSistemi.Controllers
 {
@@ -24,6 +27,34 @@ namespace StokTakipSistemi.Controllers
             return View(items);
         }
 
-        
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ViewBag.Departmanlar = _helper.GetDepartmanSelectList();
+            ViewBag.Unvanlar = _helper.GetUnvanSelectList();
+            
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromForm] KullaniciVM kullanici)
+        {
+            if (ModelState.IsValid)
+            {
+                var isSameTypeExists = await _kullaniciService.IsExist(u => u.Email == kullanici.Email);
+
+                if (!isSameTypeExists)
+                {
+                    var mappedKullanici = Mapper.Map<Kullanici>(kullanici);
+                    await _kullaniciService.Create(mappedKullanici);
+                    return RedirectToAction("Index");
+                }
+            }
+
+            return View();
+        }
+
+
+
     }
 }
