@@ -5,8 +5,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using StokTakipSistemi.DTOModels;
+using StokTakipSistemi.Helpers;
+using StokTakipSistemi.Models;
 using StokTakipSistemi.Services;
 using StokTakipSistemi.Services.Interfaces;
+using StokTakipSistemi.ViewModels;
 
 namespace StokTakipSistemi.Controllers
 {
@@ -15,12 +18,14 @@ namespace StokTakipSistemi.Controllers
         private readonly ISiparisService _siparisService;
         private readonly IUrunService _urunService;
         private readonly IFaturaService _faturaService;
+        private readonly Helper _helper;
 
-        public SiparisController(ISiparisService siparisService, IUrunService urunService, IFaturaService faturaService)
+        public SiparisController(ISiparisService siparisService, IUrunService urunService, IFaturaService faturaService, Helper helper)
         {
             _siparisService = siparisService;
             _urunService = urunService;
             _faturaService = faturaService;
+            _helper = helper;
         }
         public async Task<IActionResult> Index()
         {
@@ -38,6 +43,38 @@ namespace StokTakipSistemi.Controllers
 
             return View(mappedItems);
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ViewBag.Urun = _helper.GetUrunSelectList();           
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromForm] SiparisVM siparis)
+        {
+            if (ModelState.IsValid)
+            {
+                var isSameProductExist = await _siparisService.IsExist(p =>
+                    p.Adet == siparis.Adet &&
+                    p.UrunId == siparis.UrunId
+                );
+
+                if (!isSameProductExist)
+                {
+                    var mappedSiparis = Mapper.Map<Siparis>(siparis);
+                    await _siparisService.Create(mappedSiparis);
+                    return RedirectToAction("Index");
+                }
+
+                ModelState.AddModelError("Name", "There is a same product in the database.");
+            }
+
+            ViewBag.Errors = ModelState.Values.SelectMany(d => d.Errors);
+            return View(siparis);
+        }
+
 
         public async Task<IActionResult> Delete(int? id)
         {
