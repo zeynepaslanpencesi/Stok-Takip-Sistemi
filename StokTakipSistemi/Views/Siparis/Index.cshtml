@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<StokTakipSistemi.DTOModels.SiparisSelfDTO>
-
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,17 +9,14 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        Siparis Listesi
-                        <small>Tüm siparişlerin listesi</small>
+                        Order List
+                        <small>List of all orders</small>
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
                             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="material-icons">more_vert</i>
                             </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a asp-action="Create" class=" waves-effect waves-block">Sipariş Oluştur</a></li>
-                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -28,7 +24,7 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Urun</th>
+                                <th>Ürün</th>
                                 <th>Adet</th>
                                 <th>Tarih</th>
                                 <th>Actions</th>
@@ -43,8 +39,8 @@
                                     <td>@item.Tarih.ToShortDateString()</td>
                                     <td>
                                         <a asp-action="Edit" asp-route-id="@item.FaturaId">Fatura</a> |
-                                        <a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |
-                                        <a asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                                     </td>
                                 </tr>
                             }
@@ -55,4 +51,3 @@
         </div>
     </div>
 </div>
-

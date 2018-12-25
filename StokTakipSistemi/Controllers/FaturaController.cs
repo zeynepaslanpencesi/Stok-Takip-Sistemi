@@ -39,7 +39,7 @@ namespace StokTakipSistemi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromForm] FaturaVM fatura)
+        public async Task<IActionResult> Create([FromBody] FaturaVM fatura)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,6 @@ namespace StokTakipSistemi.Controllers
             ViewBag.Errors = ModelState.Values.SelectMany(d => d.Errors);
             return View(fatura);
         }
-
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
