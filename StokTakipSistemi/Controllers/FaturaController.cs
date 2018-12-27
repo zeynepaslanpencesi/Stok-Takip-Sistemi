@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StokTakipSistemi.Helpers;
 using StokTakipSistemi.Models;
@@ -11,6 +12,7 @@ using StokTakipSistemi.ViewModels;
 
 namespace StokTakipSistemi.Controllers
 {
+    [Authorize]
     public class FaturaController : Controller
     {
         private readonly IFaturaService _faturaService;
