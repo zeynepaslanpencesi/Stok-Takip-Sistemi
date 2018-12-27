@@ -39,7 +39,7 @@ namespace StokTakipSistemi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] FaturaVM fatura)
+        public async Task<IActionResult> Create([FromForm] FaturaVM fatura)
         {
             if (ModelState.IsValid)
             {

@@ -25,8 +25,15 @@ namespace StokTakipSistemi.Data
         public DbSet<UrunSaglayici> UrunSaglayici { get; set; }
         public DbSet<Departman> Departman { get; set; }
         public DbSet<Unvan> Unvan { get; set; }
-       
-        
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
+
+        public DbSet<StokTakipSistemi.DTOModels.FaturaDüzenleDTO> FaturaDüzenleDTO { get; set; }
+
+        public DbSet<StokTakipSistemi.DTOModels.SiparisDTO> SiparisDTO { get; set; }
 
 
 
