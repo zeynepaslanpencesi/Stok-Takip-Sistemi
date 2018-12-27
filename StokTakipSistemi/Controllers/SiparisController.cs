@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StokTakipSistemi.DTOModels;
 using StokTakipSistemi.Helpers;
@@ -13,6 +14,7 @@ using StokTakipSistemi.ViewModels;
 
 namespace StokTakipSistemi.Controllers
 {
+    [Authorize]
     public class SiparisController : Controller
     {
         private readonly ISiparisService _siparisService;
