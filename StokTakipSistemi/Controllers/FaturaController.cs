@@ -61,11 +61,11 @@ namespace StokTakipSistemi.Controllers
                     await _siparisService.Create(item);
                 }
 
-                return RedirectToAction("Index");
+               
             }
 
-            ViewBag.Errors = ModelState.Values.SelectMany(d => d.Errors);
-            return View(fatura);
+            //ViewBag.Errors = ModelState.Values.SelectMany(d => d.Errors);
+            return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)

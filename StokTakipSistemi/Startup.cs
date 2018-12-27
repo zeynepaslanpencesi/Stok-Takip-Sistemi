@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +32,29 @@ namespace StokTakipSistemi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
+            services.Configure<LoginVM>(Configuration);
+            var config = new LoginVM();
+            Configuration.Bind("LoginVM", config);
+            services.AddSingleton(config);
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => {
+                    options.LoginPath = "/Account/Login/";
+
+                    options.Events.OnRedirectToLogin = (context) =>
+                    {
+                        context.Response.StatusCode = 401;
+                        return Task.CompletedTask;
+                    };
+
+                    options.Events.OnRedirectToAccessDenied = (context) =>
+                    {
+                        context.Response.StatusCode = 401;
+                        context.Response.Redirect("/Account/Unauthorized/");
+                        return Task.CompletedTask;
+                    };
+                });
             services.AddDbContext<StokTakipSistemiDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
 
@@ -57,11 +82,12 @@ namespace StokTakipSistemi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, StokTakipSistemiDbContext dbContext)
         {
+            app.UseAuthentication();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-           
 
             app.UseStaticFiles();
 
@@ -87,11 +113,26 @@ namespace StokTakipSistemi
 
             });
 
-                app.UseMvc(routes =>
-            {
+            app.UseMvc(routes => {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Urun}/{action=Index}/{id?}");
+                    "default",
+                    "{controller=Account}/{action=Login}/"
+                );
+            });
+
+            app.Use((context, next) =>
+            {
+                if (context.User.Identity.IsAuthenticated)
+                {
+                    var route = context.GetRouteData();
+                    if (route.Values["controller"].ToString() == "Acccount" &&
+                        route.Values["action"].ToString() == "Login")
+                    {
+                        context.Response.Redirect("/Urun/Index");
+                    }
+                }
+
+                return next();
             });
         }
     }

@@ -33,6 +33,7 @@ namespace StokTakipSistemi.Services
 
         public async Task Delete(int? id)
         {
+            
             var entity = await Get(id);
             
         }
