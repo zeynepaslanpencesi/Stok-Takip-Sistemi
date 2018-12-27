@@ -11,6 +11,7 @@ using StokTakipSistemi.ViewModels;
 
 namespace StokTakipSistemi.Controllers
 {
+    [Authorize]
     
     public class SehirController : Controller
     {
