@@ -33,9 +33,11 @@ namespace StokTakipSistemi.Services
 
         public async Task Delete(int? id)
         {
-            
+
             var entity = await Get(id);
-            
+            _dbSet.Remove(entity);
+            await _dbContext.SaveChangesAsync();
+
         }
 
         public async Task<T> Get(int? id)
