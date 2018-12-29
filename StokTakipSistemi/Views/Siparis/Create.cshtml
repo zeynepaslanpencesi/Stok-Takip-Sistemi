@@ -1,0 +1,59 @@
+﻿@model StokTakipSistemi.DTOModels.SiparisSelfDTO
+
+@{
+    ViewData["Title"] = "Oluştur";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+        <div class="header">
+            <h2>
+                @ViewData["Title"]
+                <small>Yeni Sipariş Oluştur</small>
+            </h2>
+            <ul class="header-dropdown m-r--5">
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                        <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a asp-action="Index" class=" waves-effect waves-block">Listeye geri dön</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="body">
+            <h2 class="card-inside-title">Form</h2>
+            <div class="row clearfix">
+                <form asp-action="Create" method="post">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input asp-for="Adet" class="form-control" placeholder="Adet" />
+                                <span asp-validation-for="Adet" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input asp-for="Urun" class="form-control" placeholder="Ürün" />
+                                <span asp-validation-for="Urun" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input asp-for="Tarih" type="date" class="form-control" placeholder="Tarih" />
+                                <span asp-validation-for="Tarih" class="text-danger"></span>
+                            </div>
+                        </div>             
+                        <div class="form-group">
+                            <div class="form-line checkbox">
+                                <input type="submit" class="btn btn-block btn-lg btn-default waves-effect" id="create" value="Oluştur">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

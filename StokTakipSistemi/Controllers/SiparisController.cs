@@ -33,14 +33,14 @@ namespace StokTakipSistemi.Controllers
         {
             var items = _siparisService.GetAll();
             var mappedItems = Mapper.Map<IEnumerable<SiparisSelfDTO>>(_siparisService.GetAll());
-            var urunler = await _urunService.GetAllWithRelatives();
+            var products = await _urunService.GetAllWithRelatives();
 
             foreach (var item in mappedItems)
             {
-                var urun = await _urunService.Get(item.UrunId);
-                //item.Urun = urun.Adi;
-                var fatura = await _faturaService.Get(item.FaturaId);
-               // item.Tarih = fatura.Tarih;
+                var product = await _urunService.Get(item.UrunId);
+                //item.Urun = product.Adi;
+                var bill = await _faturaService.Get(item.FaturaId);
+                //item.Tarih = bill.Tarih;
             }
 
             return View(mappedItems);

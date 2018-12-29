@@ -53,7 +53,7 @@ namespace StokTakipSistemi.Controllers
                 var userPrincipal = new ClaimsPrincipal(userIdentity);
                 await HttpContext.SignInAsync(userPrincipal);
 
-                return RedirectToAction("Index", "Urun");
+                return RedirectToAction("Index", "Fatura");
             }
 
             return RedirectToAction("Unauthorized", "Account");
