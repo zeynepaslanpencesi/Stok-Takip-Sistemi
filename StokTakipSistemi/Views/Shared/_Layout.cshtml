@@ -44,18 +44,8 @@
     <!-- #END# Page Loader -->
     <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
-    <!-- #END# Overlay For Sidebars -->
-    <!-- Search Bar -->
-    <div class="search-bar">
-        <div class="search-icon">
-            <i class="material-icons">search</i>
-        </div>
-        <input type="text" placeholder="START TYPING...">
-        <div class="close-search">
-            <i class="material-icons">close</i>
-        </div>
-    </div>
-    <!-- #END# Search Bar -->
+    <!-- #END# Overlay For Sidebars -->    
+    
     <!-- Top Bar -->
     <nav class="navbar">
         <div class="container-fluid">
@@ -67,7 +57,7 @@
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Call Search -->
-                    <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
+                   
                     <!-- #END# Call Search -->
                     <!-- Notifications -->
                     <li class="dropdown">
@@ -99,20 +89,14 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="images/user.png" width="48" height="48" alt="User" />
+                    <img src="~/images/user.png" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                    <div class="email">john.doe@example.com</div>
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Zeynep Aslanpençesi</div>
+                    <div class="email">zeyneppasp@gmail.com</div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
-                            <li role="seperator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
-                            <li role="seperator" class="divider"></li>
+                        <ul class="dropdown-menu pull-right">                            
                             <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
                         </ul>
                     </div>
@@ -122,7 +106,7 @@
             <!-- Menu -->
             <div class="menu">
                 <ul class="list">
-                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="header">ANA MENÜ</li>
                     <li class="active" hidden>
                         <a asp-controller="MembershipType" asp-action="Index">
                             <i class="material-icons">face</i>
@@ -188,33 +172,14 @@
                             <i class="material-icons">add_shopping_cart</i>
                             <span>Sipariş</span>
                         </a>
-                    </li>
-                    <li class="header">LABELS</li>
-                    <li>
-                        <a href="javascript:void(0);">
-                            <i class="material-icons col-red">donut_large</i>
-                            <span>Önemli</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);">
-                            <i class="material-icons col-amber">donut_large</i>
-                            <span>Uyarı</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);">
-                            <i class="material-icons col-light-blue">donut_large</i>
-                            <span>Bilgi</span>
-                        </a>
-                    </li>
+                    </li>                    
                 </ul>
             </div>
             <!-- #Menu -->
             <!-- Footer -->
             <div class="legal">
                 <div class="copyright">
-                    &copy; 2018 - 2019 <a href="javascript:void(0);">IMS</a>.
+                    &copy; 2018 - 2019 <a href="javascript:void(0);"></a>.
                 </div>
                 <div class="version">
                     <b>Version: </b> 1.0
@@ -368,19 +333,13 @@
         <!-- #END# Right Sidebar -->
     </section>
     <section class="content">
-        <div class="container-fluid">
-            <div class="block-header">
-                <h2>DASHBOARD</h2>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="info-box bg-cyan hover-expand-effect">
-                    <div class="content">
-                        <div class="text">NEW COMMENTS</div>
-                        <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20"></div>
-                    </div>
-                </div>
-            </div>
-            @RenderBody()
+
+        <br />
+        <br />
+        <br />
+        
+
+        @RenderBody()
 
     </section>
     <!-- Jquery Core Js -->

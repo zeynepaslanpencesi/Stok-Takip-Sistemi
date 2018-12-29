@@ -38,9 +38,9 @@ namespace StokTakipSistemi.Controllers
             foreach (var item in mappedItems)
             {
                 var urun = await _urunService.Get(item.UrunId);
-                item.Urun = urun.Adi;
+                //item.Urun = urun.Adi;
                 var fatura = await _faturaService.Get(item.FaturaId);
-                //item.Tarih = fatura.Tarih;
+               // item.Tarih = fatura.Tarih;
             }
 
             return View(mappedItems);

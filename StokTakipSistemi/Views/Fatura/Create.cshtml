@@ -57,7 +57,7 @@
                                     <li class="dropdown">
                                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
                                             <i class="material-icons">more_vert</i>
-                                        </a>                                        
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -94,11 +94,67 @@
                                 </div>
                             </div>
                         </div>
+                        <script type="text/javascript">
+                                $(document).ready(function ()
+                                {
+                                    var orders = [];
+
+                                    $("#add").click(function () {
+
+                                        var count = $("#count").val();
+                                        var product_text = $("#productSelect option:selected").text();
+                                        var product_id = $("#productSelect option:selected").val();
+                                        console.log(product_text);
+                                        console.log(product_id);
+                                        console.log(count);
+
+                                        if (product_text == "Select Product" || count < 1) {
+                                            console.log("hata");
+                                            return;
+                                        }
+
+                                        $("#orders").append('<tr id="' + product_id + '"><td>' + product_text + '</td><td>' + count + '</td><td>Action</td><td><button class="btn btn-danger" href="#" id="delete">Delete</button></td></tr>');
+                                        orders.push({ "productId": product_id, "count": count });
+                                        console.log(orders);
+                                    });
+
+                                    $("#orders").on('click', '.btn-danger', function () {
+                                        $(this).closest('tr').remove();
+                                    });
+
+                                    $('#create').on('click', function (e) {
+                                        e.preventDefault();
+                                        var bill = {
+                                            date: $('#Date').val(),
+                                            providerId: $('#ProviderId option:selected').val(),
+                                            orders: orders
+                                        };
+
+                                        console.log(bill);
+
+                                        $.ajax({
+                                            type: 'POST',
+                                            contentType: 'application/json; charset=utf-8',
+                                            url: '@Url.Action("Create", "Bill")',
+                                            data: JSON.stringify(bill),
+                                            dataType: 'json',
+                                            success: function (response) {
+                                                alert(response.message);
+                                                window.location.replace('@Url.Action("Index", "Bill")');
+                                            },
+                                            error: function (response) {
+                                                console.log(response.message);
+                                            }
+                                        });
+                                    });
+                                });
+                        </script>
                         <div class="form-group">
                             <div class="form-line">
                                 <input type="submit" class="btn btn-block btn-lg btn-default waves-effect" id="create" value="Oluştur">
                             </div>
                         </div>
+
                     </div>
                 </form>
             </div>
