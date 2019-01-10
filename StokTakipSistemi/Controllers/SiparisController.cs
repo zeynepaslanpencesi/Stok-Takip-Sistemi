@@ -54,7 +54,7 @@ namespace StokTakipSistemi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromForm] SiparisVM siparis)
+        public async Task<IActionResult> Create([FromForm] Siparis siparis)
         {
             if (ModelState.IsValid)
             {
