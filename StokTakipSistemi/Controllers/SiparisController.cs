@@ -77,6 +77,40 @@ namespace StokTakipSistemi.Controllers
             return View(siparis);
         }
 
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var itemToUpdate = await _siparisService.Get(id);
+
+            if (itemToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            return View(itemToUpdate);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, Siparis siparis)
+        {
+            if (id != siparis.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _siparisService.Update(siparis);
+                return RedirectToAction("Index");
+            }
+
+            return NotFound();
+        }
+
 
         public async Task<IActionResult> Delete(int? id)
         {
